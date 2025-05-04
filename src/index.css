@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 overflow-x-hidden;
+}
+
+@layer components {
+  .sidebar-icon {
+    @apply mr-3 w-5 h-5 text-neutral-600 transition-colors;
+  }
+
+  .sidebar-link {
+    @apply flex items-center px-4 py-3 text-neutral-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all;
+  }
+
+  .sidebar-link.active {
+    @apply text-primary-600 bg-primary-50;
+  }
+
+  .sidebar-link.active .sidebar-icon {
+    @apply text-primary-600;
+  }
+
+  .stat-card {
+    @apply bg-white rounded-lg p-4 md:p-6 shadow-card hover:shadow-card-hover transition-all cursor-pointer;
+  }
+
+  .trend-up {
+    @apply text-success-500;
+  }
+
+  .trend-down {
+    @apply text-error-500;
+  }
+
+  .card-title {
+    @apply text-base md:text-lg font-medium text-neutral-600 mb-4;
+  }
+
+  .announcement-item {
+    @apply border-b border-gray-100 py-4 last:border-0;
+  }
+
+  .calendar-day {
+    @apply h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors text-sm md:text-base;
+  }
+
+  .calendar-day.today {
+    @apply bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .calendar-day.other-month {
+    @apply text-gray-300;
+  }
+}
+
+/* Animation for trend lines */
+@keyframes draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.trend-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw 1.5s ease forwards;
+}
