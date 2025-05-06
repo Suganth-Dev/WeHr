@@ -16,7 +16,7 @@ const Sidebar = ({ onClose }) => {
   return (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-primary-700">WeHR</h1>
+        <h1 className="text-2xl font-bold text-black">WeHR</h1>
         <button 
           className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
           onClick={onClose}

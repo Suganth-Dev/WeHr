@@ -62,27 +62,37 @@ export default function Employees() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Employee Management</h1>
-
-      {view === 'menu' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div
-            onClick={() => setView('list')}
-            className="border-2 border-[#EF4444] rounded-lg p-6 flex flex-col items-center cursor-pointer hover:bg-[#FFF1F2]"
-          >
-            <Plus size={48} className="text-[#EF4444]" />
-            <p className="mt-2 text-[#EF4444] font-semibold">Employee</p>
-          </div>
-          <div
-            onClick={() => alert('Org Config coming soon!')}
-            className="border-2 border-gray-300 rounded-lg p-6 flex flex-col items-center cursor-pointer hover:bg-gray-100"
-          >
-            <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
-            </svg>
-            <p className="mt-2 text-gray-500 font-semibold">Org Config</p>
-          </div>
+    <h1 className="text-2xl font-bold mb-6 text-gray-800">Employee</h1>
+    
+    {view === 'menu' && (
+      <div className="flex gap-3 pt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+        {/* Employee Box */}
+        <div
+          onClick={() => setView('list')}
+          className="w-40 h-40 border-2 border-[#EF4444] rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-[#FFF1F2] shadow-sm"
+        >
+          <Plus size={40} className="text-[#EF4444]" />
+          <p className="mt-2 text-[#EF4444] font-semibold text-sm text-center">Employee</p>
         </div>
+    
+        {/* Org Config Box */}
+        <div
+          onClick={() => alert('Org Config coming soon!')}
+          className="w-40 h-40 border-2 border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 shadow-sm"
+        >
+          <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
+          </svg>
+          <p className="mt-2 text-gray-500 font-semibold text-sm text-center">Org Config</p>
+        </div>
+      </div>
+    </div>
+    
+    
+     
+
+      
       )}
 
       {view === 'list' && (
@@ -172,7 +182,7 @@ export default function Employees() {
 function CreateEmployeeForm({ onCancel, onSave, initialData }) {
   const [form, setForm] = useState(() => initialData || {
     name: '', id: '', joinDate: '', email: '', mobile: '', status: '',
-    dob: '', gender: '', maritalStatus: '', isChallenged: '', bloodGroup: '', department: ''
+    dob: '', gender: '', maritalStatus: '', isChallenged: '', bloodGroup: '', designation: '', personalEmail: ''
   });
 
   useEffect(() => {
@@ -189,12 +199,11 @@ function CreateEmployeeForm({ onCancel, onSave, initialData }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 border rounded-lg shadow-md">
-      <h2 className="text-xl font-bold">{initialData ? 'Edit' : 'Add'} Employee</h2>
-
+    <form onSubmit={handleSubmit} className="space-y-9 bg-white p-6 border rounded-lg shadow-md">
+      {/* Employee Details */}
       <div>
         <h3 className="text-lg font-semibold mb-4">Add details of an employee</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <InputField label="Employee Name" name="name" value={form.name} onChange={handleChange} required />
           <InputField label="Employee Number" name="id" value={form.id} onChange={handleChange} required />
           <InputField label="Date of Joining" name="joinDate" type="date" value={form.joinDate} onChange={handleChange} required />
@@ -204,54 +213,63 @@ function CreateEmployeeForm({ onCancel, onSave, initialData }) {
         </div>
       </div>
 
+      {/* Personal Details */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">Personal details</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <InputField label="Date of Birth" name="dob" type="date" value={form.dob} onChange={handleChange} />
-          <SelectField label="Gender" name="gender" value={form.gender} onChange={handleChange} options={['Male', 'Female', 'Other']} />
-          <SelectField label="Marital Status" name="maritalStatus" value={form.maritalStatus} onChange={handleChange} options={['Single', 'Married']} />
-          <SelectField label="Is Physically Challenged" name="isChallenged" value={form.isChallenged} onChange={handleChange} options={['No', 'Yes']} />
-          <SelectField label="Blood Group" name="bloodGroup" value={form.bloodGroup} onChange={handleChange} options={['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']} />
-          <SelectField label="Department" name="department" value={form.department} onChange={handleChange} options={['Development', 'QA', 'Support', 'HR']} />
+        <h3 className="text-lg font-semibold mb-4">Personal Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <InputField label="Date of Birth" name="dob" type="date" value={form.dob} onChange={handleChange} required />
+          <SelectField label="Gender" name="gender" value={form.gender} onChange={handleChange} options={['Male', 'Female', 'Other']} required />
+          <SelectField label="Marital Status" name="maritalStatus" value={form.maritalStatus} onChange={handleChange} options={['Single', 'Married']} required />
+          <SelectField label="Is Physical Challenged" name="isChallenged" value={form.isChallenged} onChange={handleChange} options={['No', 'Yes']} required />
+          <SelectField label="Blood Group" name="bloodGroup" value={form.bloodGroup} onChange={handleChange} options={['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']} required />
+          <InputField label="Personal Email ID" name="personalEmail" value={form.personalEmail} onChange={handleChange} required />
+        </div>
+
+        <div className='pt-5'>
+        <SelectField label="designation" name="designation" value={form.designation} onChange={handleChange} options={['Software Engineer','React Developer','Cloud Engineer','Full Stack Developer', 'Front End Developer']} required />
         </div>
       </div>
 
+      {/* Actions */}
       <div className="flex justify-end gap-4">
         <button type="button" onClick={onCancel} className="border px-4 py-2 rounded hover:bg-gray-50">Cancel</button>
-        <button type="submit" className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">Save</button>
+        <button type="submit" className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800">Save</button>
       </div>
     </form>
   );
 }
 
-function InputField({ label, name, value, onChange, type = 'text', required = false }) {
+
+function InputField({ label, name, value, onChange, type = 'text', required }) {
   return (
     <div className="flex flex-col">
-      <label className="font-medium mb-1">{label}</label>
+      <label htmlFor={name} className="text-sm font-medium mb-1">{label}</label>
       <input
         type={type}
         name={name}
+        id={name}
         value={value}
         onChange={onChange}
         required={required}
-        className="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
       />
     </div>
   );
 }
 
-function SelectField({ label, name, value, onChange, options, required = false }) {
+function SelectField({ label, name, value, onChange, options, required }) {
   return (
     <div className="flex flex-col">
-      <label className="font-medium mb-1">{label}</label>
+      <label htmlFor={name} className="text-sm font-medium mb-1">{label}</label>
       <select
         name={name}
+        id={name}
         value={value}
         onChange={onChange}
         required={required}
-        className="border rounded px-3 py-2"
+        className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
       >
-        <option value="">Select {label}</option>
+        <option value="">Select</option>
         {options.map(opt => (
           <option key={opt} value={opt}>{opt}</option>
         ))}

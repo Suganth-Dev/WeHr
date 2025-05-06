@@ -34,7 +34,7 @@ const LoginPage = () => {
       }
 
       // Navigate to layout/dashboard
-      navigate('/layout/dashboard', { replace: true });
+      navigate('/dashboard', { replace: true });
     }
   };
   

@@ -20,15 +20,15 @@ body {
   }
 
   .sidebar-link {
-    @apply flex items-center px-4 py-3 text-neutral-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all;
+    @apply flex items-center px-4 py-3 text-neutral-600 hover:bg-primary-50 rounded-lg transition-all;
   }
 
   .sidebar-link.active {
-    @apply text-primary-600 bg-primary-50;
+    @apply text-red-500 bg-primary-50;
   }
 
   .sidebar-link.active .sidebar-icon {
-    @apply text-primary-600;
+    @apply text-red-500
   }
 
   .stat-card {
